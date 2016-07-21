@@ -1,0 +1,62 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../cordova-google-signin/cordova-google-signin.html">
+
+<link rel="import" href="../google-signin/google-signin.html">
+<link rel="import" href="../google-signin/google-signin-aware.html">
+
+<link rel="import" href="../polymerfire/firebase-auth.html">
+
+<dom-module id="google-firebase-login">
+<template>
+  <template is="dom-if" if="{{isCordova}}" restamp>
+    <cordova-google-signin id="auth" client_id="{{clientId}}" client_secret="{{clientSecret}}" token="{{tok}}"></cordova-google-signin>
+  </template>
+  <template is="dom-if" if="{{!isCordova}}">
+    <google-signin client-id="{{clientIdWeb}}" scopes="https://www.googleapis.com/auth/drive" style="display:none"></google-signin>
+    <google-signin-aware id="auth" clientId="{{clientIdWeb}}" on-google-signin-aware-success="handleSignin"></google-signin-aware>
+  </template>
+
+  <firebase-auth id="authfire" user="{{user}}"></firebase-auth>
+
+</template>
+
+<script>
+	Polymer({
+	  is: 'google-firebase-login',
+		properties: {
+			isCordova: {
+				type: Boolean,
+				value: function(){
+					return Boolean(window.cordova);
+				}
+			},
+      clientId: String,
+      clientIdWeb: String,
+      clientSecret: String,
+      tok: {
+        type: String,
+        observer: '_tokChanged'
+	    }
+    },
+    signIn: function(){
+    	document.querySelector('#auth').signIn();
+    },
+    _tokChanged: function(newval, oldval){
+    	if(tok){
+    		this.handleSignin();
+    	}
+    },
+    handleSignin: function(payload){
+    	var me=this;
+    	var credential = firebase.auth.GoogleAuthProvider.credential(payload.detail.id_token);
+    	this.$.authfire.signInWithCredential(credential).then(
+    		function() {
+    			me.fire('succesful-firebase-signin');
+				}, function(error) {
+					throw new Error(error);
+			});
+    }
+});
+</script>
+</dom-module>
