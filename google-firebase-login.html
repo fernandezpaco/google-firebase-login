@@ -43,7 +43,7 @@
     	document.querySelector('#auth').signIn();
     },
     _tokChanged: function(newval, oldval){
-    	if(tok){
+    	if(this.tok){
     		this.handleSignin();
     	}
     },
