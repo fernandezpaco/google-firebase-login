@@ -10,7 +10,7 @@
 <dom-module id="google-firebase-login">
 <template>
   <template is="dom-if" if="{{isCordova}}" restamp>
-    <cordova-google-signin id="auth" client_id="{{clientId}}" client_secret="{{clientSecret}}" access_token="{{tok}}" scopes="profile"></cordova-google-signin>
+    <cordova-google-signin id="auth" client_id="{{clientId}}" client_secret="{{clientSecret}}" id_token="{{tok}}" scopes="profile"></cordova-google-signin>
   </template>
   <template is="dom-if" if="{{!isCordova}}">
     <google-signin client-id="{{clientIdWeb}}" scopes="profile" style="display:none"></google-signin>
