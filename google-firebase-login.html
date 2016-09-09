@@ -44,7 +44,7 @@
     },
     _tokChanged: function(newval, oldval){
     	if(this.tok){
-    		this.handleSignin();
+    		this.handleSignin({detail:{id_token:this.tok}});
     	}
     },
     handleSignin: function(payload){
