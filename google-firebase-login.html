@@ -28,7 +28,7 @@
 			isCordova: {
 				type: Boolean,
 				value: function(){
-					return Boolean(window.cordova);
+					return !(typeof window.cordova === "undefined");
 				}
 			},
       clientId: String,
