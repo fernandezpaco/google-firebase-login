@@ -1,7 +1,7 @@
 {
   "name": "google-firebase-login",
   "homepage": "https://github.com/fernandezpaco/google-firebase-login",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "authors": [
     "e022333 <ffernandez@bbva.com>"
   ],
@@ -13,7 +13,7 @@
   "dependencies":{
     "polymer": "Polymer/polymer#^1.1.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
-    "cordova-google-signin": "https://github.com/fernandezpaco/cordova-google-signin.git",
+    "cordova-oauth": "https://github.com/fernandezpaco/cordova-oauth.git",
     "google-signin": "GoogleWebComponents/google-signin#^1.3.6",
     "polymerfire": "master"
   },

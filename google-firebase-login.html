@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 
-<link rel="import" href="../cordova-google-signin/cordova-google-signin.html">
+<link rel="import" href="../cordova-oauth/cordova-oauth.html">
 
 <link rel="import" href="../google-signin/google-signin.html">
 <link rel="import" href="../google-signin/google-signin-aware.html">
@@ -10,7 +10,8 @@
 <dom-module id="google-firebase-login">
 <template>
   <template is="dom-if" if="{{isCordova}}" restamp>
-    <cordova-google-signin id="auth" client_id="{{clientId}}" client_secret="{{clientSecret}}" id_token="{{tok}}" scopes="profile"></cordova-google-signin>
+    <cordova-oauth id="auth" client_id="{{clientId}}" client_secret="{{clientSecret}}" id_token="{{tok}}" scopes="profile" oauth_token_url="https://accounts.google.com/o/oauth2/token"
+    oauth_authorization_url="https://accounts.google.com/o/oauth2/auth"></cordova-oauth>
   </template>
   <template is="dom-if" if="{{!isCordova}}">
     <google-signin client-id="{{clientIdWeb}}" scopes="profile" style="display:none"></google-signin>
